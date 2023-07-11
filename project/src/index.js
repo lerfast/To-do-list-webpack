@@ -15,12 +15,13 @@ function handleAddItem() {
 }
 
 function handleTaskClick(event) {
-  if (event.target.classList.contains('remove-item')) {
-    const listItem = event.target.closest('li');
+  const { target } = event;
+  if (target.classList.contains('remove-item')) {
+    const listItem = target.closest('li');
     const index = Array.from(taskList.children).indexOf(listItem);
     removeItem(index);
   } else {
-    const listItem = event.target.closest('li');
+    const listItem = target.closest('li');
     const index = Array.from(taskList.children).indexOf(listItem);
     toggleItem(index);
   }
@@ -31,5 +32,3 @@ function handleClearCompleted() {
 }
 
 renderTasks();
-
-export { handleAddItem, handleTaskClick, handleClearCompleted };
