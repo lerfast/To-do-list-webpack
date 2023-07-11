@@ -1,0 +1,59 @@
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.add-item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.add-item input {
+  flex-grow: 1;
+  padding: 5px;
+}
+
+.add-item button {
+  margin-left: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+li.completed {
+  text-decoration: line-through;
+}
+
+li span {
+  flex-grow: 1;
+}
+
+li .remove-item {
+  margin-left: 10px;
+  color: #f00;
+  cursor: pointer;
+}
+
+li input[type="checkbox"] {
+  margin-right: 10px;
+}
