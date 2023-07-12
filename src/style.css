@@ -26,7 +26,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1px;
-  min-width: 350px;
+  min-width: 410px;
   border: 5px solid rgb(7, 6, 3);
   border-radius: 5px;
 }
@@ -115,4 +115,8 @@ body {
   text-align: center;
   color: rgb(116, 116, 116);
   cursor: pointer;
+}
+
+.list-placeholder {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
