@@ -1,3 +1,4 @@
+import './style.css';
 import {
   renderTasks, addItem, removeItem, toggleItem, clearCompleted,
 } from './todo.js';
