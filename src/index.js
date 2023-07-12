@@ -1,5 +1,5 @@
 import './style.css';
-import moreIcon from '../src/more.svg';
+import moreIcon from './more.svg';
 import reload from './reload.svg';
 import enter from './enter.svg';
 
