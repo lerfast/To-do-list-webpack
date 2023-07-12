@@ -120,3 +120,16 @@ body {
 .list-placeholder {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+.delete-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.to-do-tasks .delete-icon {
+  display: none;
+}
+
+.to-do-tasks:hover .delete-icon {
+  display: inline-block;
+}

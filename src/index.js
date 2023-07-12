@@ -1,5 +1,6 @@
 import './style.css';
 import moreIcon from './more.svg';
+import deleteIcon from './delete.svg';
 import reload from './reload.svg';
 import enter from './enter.svg';
 
@@ -14,15 +15,16 @@ let todoList = [];
 const renderList = (list) => {
   let innerList = '';
   if (list.length === 0) {
-    innerList = '<h3 class="list-placeholder">Please, add your first task!</h3>';
+    innerList = '<h3 class="list-placeholder">Add your first task!</h3>';
   } else {
     const sortedList = list.sort((a, b) => a.index - b.index);
     sortedList.forEach((task) => {
       innerList += `
           <li class="to-do-tasks" data-task-id="${task.id}">
             <div class="check-box ${task.completed ? 'completed' : ''}">${task.completed ? '✓' : ''}</div>
-            <p class="task-description ${task.completed ? 'line-through' : ''}">${task.description}</p>
-            <img class="more-logo" src="${moreIcon}"/>
+            <p class="task-description ${task.completed ? 'line-through' : ''}" contenteditable>${task.description}</p>
+            <img class="more-logo" src="${moreIcon}" data-task-id="${task.id}"/>
+            <img class="delete-icon" src="${deleteIcon}" alt="Delete" data-task-id="${task.id}" style="width: 16px; height: 16px; display: none;"/>
           </li>
           `;
     });
@@ -46,6 +48,18 @@ const addTask = (description) => {
   renderList(todoList);
 };
 
+const deleteTask = (taskId) => {
+  const taskElement = ToDoListContainer.querySelector(`[data-task-id="${taskId}"]`);
+  if (taskElement) {
+    todoList = todoList.filter((task) => task.id !== taskId);
+    todoList.forEach((task, index) => {
+      task.index = index + 1;
+    });
+    saveToLocalStorage(todoList);
+    renderList(todoList);
+  }
+};
+
 const editTaskDescription = (taskId, newDescription) => {
   todoList.forEach((task) => {
     if (task.id === taskId) {
@@ -53,7 +67,6 @@ const editTaskDescription = (taskId, newDescription) => {
     }
   });
   saveToLocalStorage(todoList);
-  renderList(todoList);
 };
 
 const clearCompletedTasks = () => {
@@ -106,8 +119,28 @@ ToDoListContainer.addEventListener('click', (e) => {
       });
       saveToLocalStorage(todoList);
     } else if (e.target === moreLogo) {
-      // Handle more logo click event if needed
+      moreLogo.style.display = 'none';
+      e.target.nextElementSibling.style.display = 'inline-block';
+    } else if (e.target.classList.contains('delete-icon')) {
+      e.stopPropagation();
+      deleteTask(taskId);
     }
+  }
+});
+
+ToDoListContainer.addEventListener('mouseover', (e) => {
+  const moreLogo = e.target.closest('.more-logo');
+  if (moreLogo) {
+    moreLogo.style.display = 'none';
+    moreLogo.nextElementSibling.style.display = 'inline-block';
+  }
+});
+
+ToDoListContainer.addEventListener('mouseout', (e) => {
+  const deleteIcon = e.target.closest('.delete-icon');
+  if (deleteIcon) {
+    deleteIcon.style.display = 'none';
+    deleteIcon.previousElementSibling.style.display = 'inline-block';
   }
 });
 
