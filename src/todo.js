@@ -1,4 +1,4 @@
-let tasks = [];
+export const tasks = [];
 
 export function renderTasks() {
   const taskList = document.getElementById('taskList');
@@ -9,7 +9,7 @@ export function renderTasks() {
     listItem.innerHTML = `
       <input type="checkbox" ${task.completed ? 'checked' : ''}>
       <span>${task.description}</span>
-      <button class="remove-item">Remove</button>
+      <i class="fas fa-trash-alt remove-item"></i>
     `;
 
     if (task.completed) {
@@ -20,9 +20,7 @@ export function renderTasks() {
       toggleItem(index);
     });
 
-    const removeButton = listItem.querySelector('.remove-item');
-    removeButton.addEventListener('click', (event) => {
-      event.stopPropagation();
+    listItem.querySelector('.remove-item').addEventListener('click', () => {
       removeItem(index);
     });
 
@@ -56,6 +54,11 @@ export function toggleItem(index) {
 }
 
 export function clearCompleted() {
-  tasks = tasks.filter((task) => !task.completed);
+  tasks.splice(0, tasks.length, ...tasks.filter((task) => !task.completed));
+  renderTasks();
+}
+
+export function updateItemDescription(index, description) {
+  tasks[index].description = description;
   renderTasks();
 }

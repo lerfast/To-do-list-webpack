@@ -21,10 +21,6 @@ h1 {
   padding: 5px;
 }
 
-.add-item button {
-  margin-left: 10px;
-}
-
 ul {
   list-style: none;
   padding: 0;
@@ -48,10 +44,10 @@ li span {
   flex-grow: 1;
 }
 
-li .remove-item {
-  margin-left: 10px;
-  color: #f00;
+.remove-item {
   cursor: pointer;
+  margin-left: 10px;
+  color: rgb(13, 13, 13);
 }
 
 li input[type="checkbox"] {
