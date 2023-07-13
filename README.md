@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <img src="../../../WEEK5/CAPSTONE PROJECT MODULE 1/new/module1-capstone-project/images/luis-logo.png" alt="logo" width="70%"  height="auto" />
+  <img src="./luis-logo.png" alt="logo" width="70%"  height="auto" />
   <br/>
   <h3><b>To Do List - Webpack</b></h3>
 </div>
