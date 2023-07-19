@@ -306,7 +306,9 @@
     "yallist": "^4.0.0"
   },
   "eslintConfig": {
-    "ignorePatterns": ["coverage/"]
+    "ignorePatterns": [
+      "coverage/"
+    ]
   },
   "jest": {
     "testEnvironment": "jsdom"

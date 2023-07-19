@@ -7,6 +7,7 @@ import {
   moveTaskToTop,
   moveTaskToBottom,
 } from './utils.js';
+
 const localStorageMock = (() => {
   let store = {};
   return {

@@ -13,6 +13,7 @@ import {
   clearCompletedTasks,
   updateTaskDescription,
 } from './utils.js';
+
 const ToDoListContainer = document.getElementById('list-container');
 const reloadIcon = document.getElementById('reload-img');
 const enterIcon = document.getElementById('enter-icon');
