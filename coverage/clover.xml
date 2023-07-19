@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1689806587923" clover="3.2.0">
-  <project timestamp="1689806587923" name="All files">
+<coverage generated="1689807903688" clover="3.2.0">
+  <project timestamp="1689807903689" name="All files">
     <metrics statements="59" coveredstatements="32" conditionals="16" coveredconditionals="10" methods="17" coveredmethods="14" elements="92" coveredelements="56" complexity="0" loc="59" ncloc="59" packages="1" files="1" classes="1"/>
     <file name="utils.js" path="C:\Users\luise\Documents\GitHub\SECOND MODULE MICROVERSE\WEEK3\To-do-list-webpack\src\utils.js">
       <metrics statements="59" coveredstatements="32" conditionals="16" coveredconditionals="10" methods="17" coveredmethods="14"/>

@@ -63,7 +63,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [To Do List - Live Demo](https://lerfast.github.io/To-do-list-webpack/)
+- [To Do List - Live Demo](https://lerfast.github.io/To-do-list-webpack/dist/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
