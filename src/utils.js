@@ -1,6 +1,7 @@
 export function saveToLocalStorage(list) {
   localStorage.setItem('todoList', JSON.stringify(list));
 }
+
 export function renderList(list, container, moreIcon, deleteIcon, deleteTaskHandler) {
   container.innerHTML = '';
   list.forEach((task) => {
@@ -33,6 +34,7 @@ export function renderList(list, container, moreIcon, deleteIcon, deleteTaskHand
     container.appendChild(listItem);
   });
 }
+
 export function addTask(description, list) {
   const newTask = {
     id: Date.now(),
@@ -43,16 +45,19 @@ export function addTask(description, list) {
   list.push(newTask);
   saveToLocalStorage(list);
 }
+
 export function deleteTask(taskId, list) {
   const updatedList = list.filter((task) => task.id !== taskId);
   saveToLocalStorage(updatedList);
   return updatedList;
 }
+
 export function clearCompletedTasks(list) {
   const updatedList = list.filter((task) => !task.completed);
   saveToLocalStorage(updatedList);
   return updatedList;
 }
+
 export function updateTaskStatus(taskId, completed, list) {
   list.forEach((task) => {
     if (task.id === taskId) {
@@ -62,15 +67,16 @@ export function updateTaskStatus(taskId, completed, list) {
   saveToLocalStorage(list);
   return list;
 }
+
 export function updateTaskDescription(taskId, newDescription, list) {
-  list.forEach((task) => {
-    if (task.id === taskId) {
-      task.description = newDescription;
-    }
-  });
-  saveToLocalStorage(list);
+  const taskIndex = list.findIndex((task) => task.id === taskId);
+  if (taskIndex !== -1) {
+    list[taskIndex].description = newDescription;
+    saveToLocalStorage(list);
+  }
   return list;
 }
+
 export function moveTaskToTop(taskId, list) {
   const taskIndex = list.findIndex((task) => task.id === taskId);
   if (taskIndex !== -1 && taskIndex !== 0) {
@@ -80,6 +86,7 @@ export function moveTaskToTop(taskId, list) {
   }
   return list;
 }
+
 export function moveTaskToBottom(taskId, list) {
   const taskIndex = list.findIndex((task) => task.id === taskId);
   if (taskIndex !== -1 && taskIndex !== list.length - 1) {
