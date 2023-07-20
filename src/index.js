@@ -13,7 +13,6 @@ import {
   clearCompletedTasks,
   updateTaskDescription,
 } from './utils.js';
-
 const ToDoListContainer = document.getElementById('list-container');
 const reloadIcon = document.getElementById('reload-img');
 const enterIcon = document.getElementById('enter-icon');
@@ -22,33 +21,26 @@ const addForm = document.querySelector('.add-form');
 enterIcon.src = enter;
 reloadIcon.src = reload;
 let todoList = [];
-
 const deleteTaskHandler = (taskId) => {
   todoList = deleteTask(taskId, todoList);
   renderList(todoList, ToDoListContainer, moreIcon, deleteIcon, deleteTaskHandler);
 };
-
 const completeTaskHandler = (taskId, completed) => {
   todoList = updateTaskStatus(taskId, completed, todoList);
 };
-
 const moveTaskToTopHandler = (taskId) => {
   todoList = moveTaskToTop(taskId, todoList);
   renderList(todoList, ToDoListContainer, moreIcon, deleteIcon, deleteTaskHandler);
 };
-
 const moveTaskToBottomHandler = (taskId) => {
   todoList = moveTaskToBottom(taskId, todoList);
   renderList(todoList, ToDoListContainer, moreIcon, deleteIcon, deleteTaskHandler);
 };
-
 const clearCompletedTasksHandler = () => {
   todoList = clearCompletedTasks(todoList);
   renderList(todoList, ToDoListContainer, moreIcon, deleteIcon, deleteTaskHandler);
 };
-
 renderList(todoList, ToDoListContainer, moreIcon, deleteIcon, deleteTaskHandler);
-
 addForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const addInput = document.querySelector('.add-input');
@@ -59,16 +51,13 @@ addForm.addEventListener('submit', (e) => {
     renderList(todoList, ToDoListContainer, moreIcon, deleteIcon, deleteTaskHandler);
   }
 });
-
 clearButton.addEventListener('click', () => {
   clearCompletedTasksHandler();
 });
-
 window.onload = () => {
   todoList = JSON.parse(localStorage.getItem('todoList')) || [];
   renderList(todoList, ToDoListContainer, moreIcon, deleteIcon, deleteTaskHandler);
 };
-
 ToDoListContainer.addEventListener('click', (e) => {
   const taskElement = e.target.closest('.to-do-tasks');
   if (taskElement) {
@@ -92,12 +81,10 @@ ToDoListContainer.addEventListener('click', (e) => {
     }
   }
 });
-
 const editTaskDescriptionHandler = (taskId, newDescription) => {
   todoList = updateTaskDescription(taskId, newDescription, todoList);
   renderList(todoList, ToDoListContainer, moreIcon, deleteIcon, deleteTaskHandler);
 };
-
 ToDoListContainer.addEventListener('blur', (e) => {
   const taskElement = e.target.closest('.to-do-tasks');
   if (taskElement) {
@@ -109,7 +96,6 @@ ToDoListContainer.addEventListener('blur', (e) => {
     }
   }
 });
-
 ToDoListContainer.addEventListener('dragstart', (e) => {
   e.dataTransfer.effectAllowed = 'move';
   const taskElement = e.target.closest('.to-do-tasks');
@@ -118,11 +104,9 @@ ToDoListContainer.addEventListener('dragstart', (e) => {
     e.dataTransfer.setData('text/plain', taskId);
   }
 });
-
 ToDoListContainer.addEventListener('dragover', (e) => {
   e.preventDefault();
 });
-
 ToDoListContainer.addEventListener('drop', (e) => {
   e.preventDefault();
   const taskId = Number(e.dataTransfer.getData('text/plain'));

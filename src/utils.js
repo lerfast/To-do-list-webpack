@@ -1,7 +1,6 @@
 export function saveToLocalStorage(list) {
   localStorage.setItem('todoList', JSON.stringify(list));
 }
-
 export function renderList(list, container, moreIcon, deleteIcon, deleteTaskHandler) {
   container.innerHTML = '';
   list.forEach((task) => {
@@ -20,6 +19,7 @@ export function renderList(list, container, moreIcon, deleteIcon, deleteTaskHand
     if (task.completed) {
       taskDescription.classList.add('line-through');
     }
+    taskDescription.contentEditable = 'true';
     const moreLogo = document.createElement('img');
     moreLogo.classList.add('more-logo');
     moreLogo.src = moreIcon;
@@ -34,49 +34,37 @@ export function renderList(list, container, moreIcon, deleteIcon, deleteTaskHand
     container.appendChild(listItem);
   });
 }
-
 export function addTask(description, list) {
   const newTask = {
     id: Date.now(),
     description,
     completed: false,
-    index: list.length + 1,
   };
   list.push(newTask);
   saveToLocalStorage(list);
+  return list;
 }
-
 export function deleteTask(taskId, list) {
   const updatedList = list.filter((task) => task.id !== taskId);
   saveToLocalStorage(updatedList);
   return updatedList;
 }
-
 export function clearCompletedTasks(list) {
   const updatedList = list.filter((task) => !task.completed);
   saveToLocalStorage(updatedList);
   return updatedList;
 }
-
 export function updateTaskStatus(taskId, completed, list) {
-  list.forEach((task) => {
-    if (task.id === taskId) {
-      task.completed = completed;
-    }
-  });
-  saveToLocalStorage(list);
-  return list;
+  const updatedList = list.map((task) => (task.id === taskId ? { ...task, completed } : task));
+  saveToLocalStorage(updatedList);
+  return updatedList;
 }
-
 export function updateTaskDescription(taskId, newDescription, list) {
-  const taskIndex = list.findIndex((task) => task.id === taskId);
-  if (taskIndex !== -1) {
-    list[taskIndex].description = newDescription;
-    saveToLocalStorage(list);
-  }
-  return list;
+  // eslint-disable-next-line
+  const updatedList = list.map((task) => (task.id === taskId ? { ...task, description: newDescription } : task));
+  saveToLocalStorage(updatedList);
+  return updatedList;
 }
-
 export function moveTaskToTop(taskId, list) {
   const taskIndex = list.findIndex((task) => task.id === taskId);
   if (taskIndex !== -1 && taskIndex !== 0) {
@@ -86,7 +74,6 @@ export function moveTaskToTop(taskId, list) {
   }
   return list;
 }
-
 export function moveTaskToBottom(taskId, list) {
   const taskIndex = list.findIndex((task) => task.id === taskId);
   if (taskIndex !== -1 && taskIndex !== list.length - 1) {
@@ -94,5 +81,5 @@ export function moveTaskToBottom(taskId, list) {
     list.push(taskToMove);
     saveToLocalStorage(list);
   }
-  return list;
-}
+  return list
+ }
