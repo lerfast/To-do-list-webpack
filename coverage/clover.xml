@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1689885707911" clover="3.2.0">
-  <project timestamp="1689885707911" name="All files">
+<coverage generated="1689891409684" clover="3.2.0">
+  <project timestamp="1689891409684" name="All files">
     <metrics statements="57" coveredstatements="29" conditionals="16" coveredconditionals="10" methods="17" coveredmethods="14" elements="90" coveredelements="53" complexity="0" loc="57" ncloc="57" packages="1" files="1" classes="1"/>
     <file name="utils.js" path="C:\Users\luise\Documents\GitHub\SECOND MODULE MICROVERSE\WEEK3\To-do-list-webpack\src\utils.js">
       <metrics statements="57" coveredstatements="29" conditionals="16" coveredconditionals="10" methods="17" coveredmethods="14"/>
@@ -37,25 +37,25 @@
       <line num="43" count="2" type="stmt"/>
       <line num="44" count="2" type="stmt"/>
       <line num="45" count="2" type="stmt"/>
-      <line num="48" count="3" type="stmt"/>
+      <line num="48" count="2" type="stmt"/>
       <line num="49" count="1" type="stmt"/>
       <line num="50" count="1" type="stmt"/>
-      <line num="53" count="3" type="stmt"/>
+      <line num="53" count="2" type="stmt"/>
       <line num="54" count="1" type="stmt"/>
       <line num="55" count="1" type="stmt"/>
-      <line num="58" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="58" count="6" type="cond" truecount="2" falsecount="0"/>
       <line num="59" count="3" type="stmt"/>
       <line num="60" count="3" type="stmt"/>
       <line num="64" count="4" type="cond" truecount="2" falsecount="0"/>
       <line num="65" count="2" type="stmt"/>
       <line num="66" count="2" type="stmt"/>
-      <line num="69" count="3" type="stmt"/>
+      <line num="69" count="2" type="stmt"/>
       <line num="70" count="1" type="cond" truecount="3" falsecount="1"/>
       <line num="71" count="1" type="stmt"/>
       <line num="72" count="1" type="stmt"/>
       <line num="73" count="1" type="stmt"/>
       <line num="75" count="1" type="stmt"/>
-      <line num="78" count="2" type="stmt"/>
+      <line num="78" count="1" type="stmt"/>
       <line num="79" count="1" type="cond" truecount="3" falsecount="1"/>
       <line num="80" count="1" type="stmt"/>
       <line num="81" count="1" type="stmt"/>
