@@ -1,52 +1,39 @@
-export const saveToLocalStorage = (list) => {
+export function saveToLocalStorage(list) {
   localStorage.setItem('todoList', JSON.stringify(list));
-};
-
-export const renderList = (list, container, moreIcon, deleteIcon, deleteTaskHandler) => {
-  let innerList = '';
-  if (list.length === 0) {
-    innerList = '<h3 class="list-placeholder">Please, add your first task!</h3>';
-  } else {
-    const sortedList = list.sort((a, b) => a.index - b.index);
-    sortedList.forEach((task) => {
-      innerList += `
-        <li class="to-do-tasks" data-task-id="${task.id}">
-          <div class="check-box ${task.completed ? 'completed' : ''}">${task.completed ? '✓' : ''}</div>
-          <p class="task-description ${task.completed ? 'line-through' : ''}" contenteditable>${task.description}</p>
-          <img class="more-logo" src="${moreIcon}" data-task-id="${task.id}"/>
-          <img class="delete-icon" src="${deleteIcon}" alt="Delete" data-task-id="${task.id}" style="width: 16px; height: 16px; display: none;"/>
-        </li>
-      `;
-    });
-  }
-  container.innerHTML = innerList;
-
-  const deleteIcons = container.querySelectorAll('.delete-icon');
-  deleteIcons.forEach((deleteIcon) => {
-    deleteIcon.addEventListener('click', () => {
-      const taskId = Number(deleteIcon.dataset.taskId);
-      deleteTaskHandler(taskId);
-    });
+}
+export function renderList(list, container, moreIcon, deleteIcon, deleteTaskHandler) {
+  container.innerHTML = '';
+  list.forEach((task) => {
+    const listItem = document.createElement('li');
+    listItem.classList.add('to-do-tasks');
+    listItem.dataset.taskId = task.id;
+    const checkBox = document.createElement('div');
+    checkBox.classList.add('check-box');
+    if (task.completed) {
+      checkBox.classList.add('completed');
+      checkBox.textContent = '✓';
+    }
+    const taskDescription = document.createElement('div');
+    taskDescription.classList.add('task-description');
+    taskDescription.textContent = task.description;
+    if (task.completed) {
+      taskDescription.classList.add('line-through');
+    }
+    const moreLogo = document.createElement('img');
+    moreLogo.classList.add('more-logo');
+    moreLogo.src = moreIcon;
+    const deleteIconElement = document.createElement('img');
+    deleteIconElement.classList.add('delete-icon');
+    deleteIconElement.src = deleteIcon;
+    deleteIconElement.addEventListener('click', () => deleteTaskHandler(task.id));
+    listItem.appendChild(checkBox);
+    listItem.appendChild(taskDescription);
+    listItem.appendChild(moreLogo);
+    listItem.appendChild(deleteIconElement);
+    container.appendChild(listItem);
   });
-
-  const toDoTasks = container.querySelectorAll('.to-do-tasks');
-  toDoTasks.forEach((task) => {
-    const moreLogo = task.querySelector('.more-logo');
-    const deleteIcon = task.querySelector('.delete-icon');
-
-    task.addEventListener('mouseover', () => {
-      moreLogo.style.display = 'none';
-      deleteIcon.style.display = 'inline-block';
-    });
-
-    task.addEventListener('mouseout', () => {
-      moreLogo.style.display = 'inline-block';
-      deleteIcon.style.display = 'none';
-    });
-  });
-};
-
-export const addTask = (description, list) => {
+}
+export function addTask(description, list) {
   const newTask = {
     id: Date.now(),
     description,
@@ -55,27 +42,50 @@ export const addTask = (description, list) => {
   };
   list.push(newTask);
   saveToLocalStorage(list);
-};
-
-export const deleteTask = (taskId, list) => {
+}
+export function deleteTask(taskId, list) {
   const updatedList = list.filter((task) => task.id !== taskId);
   saveToLocalStorage(updatedList);
   return updatedList;
-};
-
-export const editTaskDescription = (taskId, newDescription, list) => {
-  const task = list.find((task) => task.id === taskId);
-  if (task) {
-    task.description = newDescription;
-    saveToLocalStorage(list);
-  }
-};
-
-export const clearCompletedTasks = (list) => {
+}
+export function clearCompletedTasks(list) {
   const updatedList = list.filter((task) => !task.completed);
-  updatedList.forEach((task, index) => {
-    task.index = index + 1;
-  });
   saveToLocalStorage(updatedList);
   return updatedList;
-};
+}
+export function updateTaskStatus(taskId, completed, list) {
+  list.forEach((task) => {
+    if (task.id === taskId) {
+      task.completed = completed;
+    }
+  });
+  saveToLocalStorage(list);
+  return list;
+}
+export function updateTaskDescription(taskId, newDescription, list) {
+  list.forEach((task) => {
+    if (task.id === taskId) {
+      task.description = newDescription;
+    }
+  });
+  saveToLocalStorage(list);
+  return list;
+}
+export function moveTaskToTop(taskId, list) {
+  const taskIndex = list.findIndex((task) => task.id === taskId);
+  if (taskIndex !== -1 && taskIndex !== 0) {
+    const taskToMove = list.splice(taskIndex, 1)[0];
+    list.unshift(taskToMove);
+    saveToLocalStorage(list);
+  }
+  return list;
+}
+export function moveTaskToBottom(taskId, list) {
+  const taskIndex = list.findIndex((task) => task.id === taskId);
+  if (taskIndex !== -1 && taskIndex !== list.length - 1) {
+    const taskToMove = list.splice(taskIndex, 1)[0];
+    list.push(taskToMove);
+    saveToLocalStorage(list);
+  }
+  return list;
+}

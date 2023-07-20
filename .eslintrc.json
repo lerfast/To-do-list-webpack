@@ -24,7 +24,8 @@
     },
     "ignorePatterns": [
       "dist/",
-      "build/"
+      "build/",
+      "coverage/"
     ]
   }
   
