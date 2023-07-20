@@ -81,5 +81,5 @@ export function moveTaskToBottom(taskId, list) {
     list.push(taskToMove);
     saveToLocalStorage(list);
   }
-  return list
- }
+  return list;
+}
