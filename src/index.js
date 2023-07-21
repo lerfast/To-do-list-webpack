@@ -82,9 +82,9 @@ ToDoListContainer.addEventListener('click', (e) => {
     }
   }
 });
-// Function to handle task description edit
 const editTaskDescriptionHandler = (taskId, newDescription) => {
   todoList = updateTaskDescription(taskId, newDescription, todoList);
+  renderList(todoList, ToDoListContainer, moreIcon, deleteIcon, deleteTaskHandler);
 };
 ToDoListContainer.addEventListener('blur', (e) => {
   const taskElement = e.target.closest('.to-do-tasks');

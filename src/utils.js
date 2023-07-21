@@ -19,6 +19,7 @@ export function renderList(list, container, moreIcon, deleteIcon, deleteTaskHand
     if (task.completed) {
       taskDescription.classList.add('line-through');
     }
+    taskDescription.contentEditable = 'true';
     const moreLogo = document.createElement('img');
     moreLogo.classList.add('more-logo');
     moreLogo.src = moreIcon;
@@ -38,10 +39,10 @@ export function addTask(description, list) {
     id: Date.now(),
     description,
     completed: false,
-    index: list.length + 1,
   };
   list.push(newTask);
   saveToLocalStorage(list);
+  return list;
 }
 export function deleteTask(taskId, list) {
   const updatedList = list.filter((task) => task.id !== taskId);
@@ -54,22 +55,15 @@ export function clearCompletedTasks(list) {
   return updatedList;
 }
 export function updateTaskStatus(taskId, completed, list) {
-  list.forEach((task) => {
-    if (task.id === taskId) {
-      task.completed = completed;
-    }
-  });
-  saveToLocalStorage(list);
-  return list;
+  const updatedList = list.map((task) => (task.id === taskId ? { ...task, completed } : task));
+  saveToLocalStorage(updatedList);
+  return updatedList;
 }
 export function updateTaskDescription(taskId, newDescription, list) {
-  list.forEach((task) => {
-    if (task.id === taskId) {
-      task.description = newDescription;
-    }
-  });
-  saveToLocalStorage(list);
-  return list;
+  // eslint-disable-next-line
+  const updatedList = list.map((task) => (task.id === taskId ? { ...task, description: newDescription } : task));
+  saveToLocalStorage(updatedList);
+  return updatedList;
 }
 export function moveTaskToTop(taskId, list) {
   const taskIndex = list.findIndex((task) => task.id === taskId);
